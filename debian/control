@@ -1,0 +1,36 @@
+Source: node-any-promise
+Maintainer: Debian Javascript Maintainers <pkg-javascript-devel@lists.alioth.debian.org>
+Uploaders: Pirate Praveen <praveen@debian.org>
+Section: javascript
+Testsuite: autopkgtest-pkg-nodejs
+Priority: optional
+Build-Depends: debhelper-compat (= 13)
+ , node-bluebird <!nocheck>
+ , node-es6-promise <!nocheck>
+ , node-immediate <!nocheck>
+ , node-is-promise <!nocheck>
+ , node-lie <!nocheck>
+ , node-pinkie <!nocheck>
+ , node-promise <!nocheck>
+ , node-q <!nocheck>
+ , node-tape <!nocheck>
+ , node-when <!nocheck>
+ , dh-sequence-nodejs
+Standards-Version: 4.6.0
+Vcs-Browser: https://salsa.debian.org/js-team/node-any-promise
+Vcs-Git: https://salsa.debian.org/js-team/node-any-promise.git
+Homepage: https://github.com/kevinbeaty/any-promise
+Rules-Requires-Root: no
+
+Package: node-any-promise
+Architecture: all
+Depends: ${misc:Depends}
+ , nodejs
+Multi-Arch: foreign
+Description: Resolve any installed ES6 compatible promise
+ Let your library support any ES 2015 (ES6) compatible `Promise` and leave the
+ choice to application authors. The application can *optionally* register its
+ preferred `Promise` implementation and it will be exported when requiring
+ `any-promise` from library code.
+ .
+ Node.js is an event-based server-side JavaScript engine.

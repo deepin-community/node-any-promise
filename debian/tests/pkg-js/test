@@ -1,0 +1,6 @@
+set -e
+export NODE_PATH=debian/tests/test_modules
+for i in `ls test/*.js|grep -v test/browser.js`; do
+	echo "### $i"
+	tape $i
+done

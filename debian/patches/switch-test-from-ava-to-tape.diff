@@ -1,0 +1,533 @@
+Description: switch test from ava to tape
+Author: Xavier Guimard <yadd@debian.org>
+Forwarded: not-needed
+Last-Update: 2020-02-18
+
+--- a/test/bluebird-shortcut.js
++++ b/test/bluebird-shortcut.js
+@@ -1,6 +1,6 @@
+-import '../register/bluebird'
++require('../register/bluebird')
+ 
+-var test = require('ava')
++var test = require('tape')
+ var implementation = require('../implementation')
+ var Promise = require('..')
+ var BluebirdPromise = require('bluebird')
+@@ -9,7 +9,8 @@
+ test(t => {
+   t.is(implementation, 'bluebird')
+   t.is(Promise, BluebirdPromise)
+-  t.truthy(isPromise(new Promise(() => {})))
+-  t.truthy(Promise.all)
+-  t.truthy(global['@@any-promise/REGISTRATION'].implementation)
++  t.ok(isPromise(new Promise(() => {})))
++  t.ok(Promise.all)
++  t.ok(global['@@any-promise/REGISTRATION'].implementation)
++  t.end();
+ })
+--- a/test/bluebird.js
++++ b/test/bluebird.js
+@@ -1,5 +1,5 @@
+ require('../register')('bluebird')
+-var test = require('ava')
++var test = require('tape')
+ var implementation = require('../implementation')
+ var Promise = require('..')
+ var BluebirdPromise = require('bluebird')
+@@ -8,7 +8,8 @@
+ test(t => {
+   t.is(implementation, 'bluebird')
+   t.is(Promise, BluebirdPromise)
+-  t.truthy(isPromise(new Promise(() => {})))
+-  t.truthy(Promise.all)
+-  t.truthy(global['@@any-promise/REGISTRATION'].implementation)
++  t.ok(isPromise(new Promise(() => {})))
++  t.ok(Promise.all)
++  t.ok(global['@@any-promise/REGISTRATION'].implementation)
++  t.end();
+ })
+--- a/test/browser.js
++++ b/test/browser.js
+@@ -1,4 +1,4 @@
+-var test = require('ava')
++var test = require('tape')
+ var Promise = require('..')
+ var version = (/v(\d+)\.(\d+)\.(\d+)/).exec(process.version)
+ var {spawn} = require('child_process')
+--- a/test/defaults.js
++++ b/test/defaults.js
+@@ -1,4 +1,4 @@
+-var test = require('ava')
++var test = require('tape')
+ var implementation = require('../implementation')
+ var Promise = require('..')
+ var isPromise = require('is-promise')
+@@ -14,7 +14,8 @@
+     t.is(implementation, 'global.Promise')
+   }
+   t.is(Promise, global.Promise)
+-  t.truthy(isPromise(new Promise(() => {})))
+-  t.truthy(Promise.all)
+-  t.truthy(global['@@any-promise/REGISTRATION'].implementation)
++  t.ok(isPromise(new Promise(() => {})))
++  t.ok(Promise.all)
++  t.ok(global['@@any-promise/REGISTRATION'].implementation)
++  t.end();
+ })
+--- a/test/es6-promise-shortcut.js
++++ b/test/es6-promise-shortcut.js
+@@ -1,6 +1,6 @@
+-import '../register/es6-promise'
++require('../register/es6-promise')
+ 
+-var test = require('ava')
++var test = require('tape')
+ var implementation = require('../implementation')
+ var Promise = require('..')
+ var ES6Promise = require('es6-promise').Promise
+@@ -9,7 +9,8 @@
+ test(t => {
+   t.is(implementation, 'es6-promise')
+   t.is(Promise, ES6Promise)
+-  t.truthy(isPromise(new Promise(() => {})))
+-  t.truthy(Promise.all)
+-  t.truthy(global['@@any-promise/REGISTRATION'].implementation)
++  t.ok(isPromise(new Promise(() => {})))
++  t.ok(Promise.all)
++  t.ok(global['@@any-promise/REGISTRATION'].implementation)
++  t.end();
+ })
+--- a/test/es6-promise.js
++++ b/test/es6-promise.js
+@@ -1,5 +1,5 @@
+ require('../register')('es6-promise')
+-var test = require('ava')
++var test = require('tape')
+ var implementation = require('../implementation')
+ var Promise = require('..')
+ var ES6Promise = require('es6-promise').Promise
+@@ -8,7 +8,8 @@
+ test(t => {
+   t.is(implementation, 'es6-promise')
+   t.is(Promise, ES6Promise)
+-  t.truthy(isPromise(new Promise(() => {})))
+-  t.truthy(Promise.all)
+-  t.truthy(global['@@any-promise/REGISTRATION'].implementation)
++  t.ok(isPromise(new Promise(() => {})))
++  t.ok(Promise.all)
++  t.ok(global['@@any-promise/REGISTRATION'].implementation)
++  t.end();
+ })
+--- a/test/global.js
++++ b/test/global.js
+@@ -3,7 +3,7 @@
+ }
+ require('../register')('global.Promise')
+ 
+-var test = require('ava')
++var test = require('tape')
+ var implementation = require('../implementation')
+ var Promise = require('..')
+ var isPromise = require('is-promise')
+@@ -11,7 +11,8 @@
+ test(t => {
+   t.is(implementation, 'global.Promise')
+   t.is(Promise, global.Promise)
+-  t.truthy(isPromise(new Promise(() => {})))
+-  t.truthy(Promise.all)
+-  t.truthy(global['@@any-promise/REGISTRATION'].implementation)
++  t.ok(isPromise(new Promise(() => {})))
++  t.ok(Promise.all)
++  t.ok(global['@@any-promise/REGISTRATION'].implementation)
++  t.end();
+ })
+--- a/test/lie-shortcut.js
++++ b/test/lie-shortcut.js
+@@ -1,5 +1,5 @@
+ require('../register/lie')
+-var test = require('ava')
++var test = require('tape')
+ var implementation = require('../implementation')
+ var Promise = require('..')
+ var LiePromise = require('lie')
+@@ -8,7 +8,8 @@
+ test(t => {
+   t.is(implementation, 'lie')
+   t.is(Promise, LiePromise)
+-  t.truthy(isPromise(new Promise(() => {})))
+-  t.truthy(Promise.all)
+-  t.truthy(global['@@any-promise/REGISTRATION'].implementation)
++  t.ok(isPromise(new Promise(() => {})))
++  t.ok(Promise.all)
++  t.ok(global['@@any-promise/REGISTRATION'].implementation)
++  t.end();
+ })
+--- a/test/lie.js
++++ b/test/lie.js
+@@ -1,5 +1,5 @@
+ require('../register')('lie')
+-var test = require('ava')
++var test = require('tape')
+ var implementation = require('../implementation')
+ var Promise = require('..')
+ var LiePromise = require('lie')
+@@ -8,7 +8,8 @@
+ test(t => {
+   t.is(implementation, 'lie')
+   t.is(Promise, LiePromise)
+-  t.truthy(isPromise(new Promise(() => {})))
+-  t.truthy(Promise.all)
+-  t.truthy(global['@@any-promise/REGISTRATION'].implementation)
++  t.ok(isPromise(new Promise(() => {})))
++  t.ok(Promise.all)
++  t.ok(global['@@any-promise/REGISTRATION'].implementation)
++  t.end();
+ })
+--- a/test/native-promise-only-shortcut.js
++++ b/test/native-promise-only-shortcut.js
+@@ -1,6 +1,6 @@
+-import '../register/native-promise-only'
++require('../register/native-promise-only')
+ 
+-var test = require('ava')
++var test = require('tape')
+ var implementation = require('../implementation')
+ var Promise = require('..')
+ var NPOPromise = require('native-promise-only')
+@@ -9,7 +9,8 @@
+ test(t => {
+   t.is(implementation, 'native-promise-only')
+   t.is(Promise, NPOPromise)
+-  t.truthy(isPromise(new Promise(() => {})))
+-  t.truthy(Promise.all)
+-  t.truthy(global['@@any-promise/REGISTRATION'].implementation)
++  t.ok(isPromise(new Promise(() => {})))
++  t.ok(Promise.all)
++  t.ok(global['@@any-promise/REGISTRATION'].implementation)
++  t.end();
+ })
+--- a/test/native-promise-only.js
++++ b/test/native-promise-only.js
+@@ -1,5 +1,5 @@
+ require('../register')('native-promise-only')
+-var test = require('ava')
++var test = require('tape')
+ var implementation = require('../implementation')
+ var Promise = require('..')
+ var NPOPromise = require('native-promise-only')
+@@ -8,7 +8,8 @@
+ test(t => {
+   t.is(implementation, 'native-promise-only')
+   t.is(Promise, NPOPromise)
+-  t.truthy(isPromise(new Promise(() => {})))
+-  t.truthy(Promise.all)
+-  t.truthy(global['@@any-promise/REGISTRATION'].implementation)
++  t.ok(isPromise(new Promise(() => {})))
++  t.ok(Promise.all)
++  t.ok(global['@@any-promise/REGISTRATION'].implementation)
++  t.end();
+ })
+--- a/test/pinkie-shortcut.js
++++ b/test/pinkie-shortcut.js
+@@ -1,5 +1,5 @@
+ require('../register/pinkie')
+-var test = require('ava')
++var test = require('tape')
+ var implementation = require('../implementation')
+ var Promise = require('..')
+ var PinkiePromise = require('pinkie')
+@@ -8,7 +8,8 @@
+ test(t => {
+   t.is(implementation, 'pinkie')
+   t.is(Promise, PinkiePromise)
+-  t.truthy(isPromise(new Promise(() => {})))
+-  t.truthy(Promise.all)
+-  t.truthy(global['@@any-promise/REGISTRATION'].implementation)
++  t.ok(isPromise(new Promise(() => {})))
++  t.ok(Promise.all)
++  t.ok(global['@@any-promise/REGISTRATION'].implementation)
++  t.end();
+ })
+--- a/test/pinkie.js
++++ b/test/pinkie.js
+@@ -1,5 +1,5 @@
+ require('../register')('pinkie')
+-var test = require('ava')
++var test = require('tape')
+ var implementation = require('../implementation')
+ var Promise = require('..')
+ var PinkiePromise = require('pinkie')
+@@ -8,7 +8,8 @@
+ test(t => {
+   t.is(implementation, 'pinkie')
+   t.is(Promise, PinkiePromise)
+-  t.truthy(isPromise(new Promise(() => {})))
+-  t.truthy(Promise.all)
+-  t.truthy(global['@@any-promise/REGISTRATION'].implementation)
++  t.ok(isPromise(new Promise(() => {})))
++  t.ok(Promise.all)
++  t.ok(global['@@any-promise/REGISTRATION'].implementation)
++  t.end();
+ })
+--- a/test/polyfill.js
++++ b/test/polyfill.js
+@@ -1,6 +1,6 @@
+ require('es6-promise').polyfill()
+ 
+-var test = require('ava')
++var test = require('tape')
+ var implementation = require('../implementation')
+ var Promise = require('..')
+ var isPromise = require('is-promise')
+@@ -11,7 +11,8 @@
+   // but works as test because es6-promise is first successfull require
+   // and we polyfilled with es6-promise
+   t.is(Promise, global.Promise)
+-  t.truthy(isPromise(new Promise(() => {})))
+-  t.truthy(Promise.all)
+-  t.truthy(global['@@any-promise/REGISTRATION'].implementation)
++  t.ok(isPromise(new Promise(() => {})))
++  t.ok(Promise.all)
++  t.ok(global['@@any-promise/REGISTRATION'].implementation)
++  t.end();
+ })
+--- a/test/promise-shortcut.js
++++ b/test/promise-shortcut.js
+@@ -1,6 +1,6 @@
+-import '../register/promise'
++require('../register/promise')
+ 
+-var test = require('ava')
++var test = require('tape')
+ var implementation = require('../implementation')
+ var Promise = require('..')
+ var PromisePromise = require('promise')
+@@ -9,7 +9,8 @@
+ test(t => {
+   t.is(implementation, 'promise')
+   t.is(Promise, PromisePromise)
+-  t.truthy(isPromise(new Promise(() => {})))
+-  t.truthy(Promise.all)
+-  t.truthy(global['@@any-promise/REGISTRATION'].implementation)
++  t.ok(isPromise(new Promise(() => {})))
++  t.ok(Promise.all)
++  t.ok(global['@@any-promise/REGISTRATION'].implementation)
++  t.end();
+ })
+--- a/test/promise.js
++++ b/test/promise.js
+@@ -1,5 +1,5 @@
+ require('../register')('promise')
+-var test = require('ava')
++var test = require('tape')
+ var implementation = require('../implementation')
+ var Promise = require('..')
+ var PromisePromise = require('promise')
+@@ -8,7 +8,8 @@
+ test(t => {
+   t.is(implementation, 'promise')
+   t.is(Promise, PromisePromise)
+-  t.truthy(isPromise(new Promise(() => {})))
+-  t.truthy(Promise.all)
+-  t.truthy(global['@@any-promise/REGISTRATION'].implementation)
++  t.ok(isPromise(new Promise(() => {})))
++  t.ok(Promise.all)
++  t.ok(global['@@any-promise/REGISTRATION'].implementation)
++  t.end();
+ })
+--- a/test/q-shortcut.js
++++ b/test/q-shortcut.js
+@@ -1,6 +1,6 @@
+-import '../register/q'
++require('../register/q')
+ 
+-var test = require('ava')
++var test = require('tape')
+ var implementation = require('../implementation')
+ var Promise = require('..')
+ var QPromise = require('q').Promise
+@@ -9,7 +9,8 @@
+ test(t => {
+   t.is(implementation, 'q')
+   t.is(Promise, QPromise)
+-  t.truthy(isPromise(new Promise(() => {})))
+-  t.truthy(Promise.all)
+-  t.truthy(global['@@any-promise/REGISTRATION'].implementation)
++  t.ok(isPromise(new Promise(() => {})))
++  t.ok(Promise.all)
++  t.ok(global['@@any-promise/REGISTRATION'].implementation)
++  t.end();
+ })
+--- a/test/q.js
++++ b/test/q.js
+@@ -1,5 +1,5 @@
+ require('../register')('q')
+-var test = require('ava')
++var test = require('tape')
+ var implementation = require('../implementation')
+ var Promise = require('..')
+ var QPromise = require('q').Promise
+@@ -8,7 +8,8 @@
+ test(t => {
+   t.is(implementation, 'q')
+   t.is(Promise, QPromise)
+-  t.truthy(isPromise(new Promise(() => {})))
+-  t.truthy(Promise.all)
+-  t.truthy(global['@@any-promise/REGISTRATION'].implementation)
++  t.ok(isPromise(new Promise(() => {})))
++  t.ok(Promise.all)
++  t.ok(global['@@any-promise/REGISTRATION'].implementation)
++  t.end();
+ })
+--- a/test/register-local.js
++++ b/test/register-local.js
+@@ -1,5 +1,5 @@
+ require('../register')('bluebird', {global: false})
+-var test = require('ava')
++var test = require('tape')
+ var implementation = require('../implementation')
+ var Promise = require('..')
+ var BluebirdPromise = require('bluebird')
+@@ -8,7 +8,8 @@
+ test(t => {
+   t.is(implementation, 'bluebird')
+   t.is(Promise, BluebirdPromise)
+-  t.truthy(isPromise(new Promise(() => {})))
+-  t.truthy(Promise.all)
+-  t.falsy(global['@@any-promise/REGISTRATION'])
++  t.ok(isPromise(new Promise(() => {})))
++  t.ok(Promise.all)
++  t.notOk(global['@@any-promise/REGISTRATION'])
++  t.end();
+ })
+--- a/test/rsvp-shortcut.js
++++ b/test/rsvp-shortcut.js
+@@ -1,6 +1,6 @@
+-import '../register/rsvp'
++require('../register/rsvp')
+ 
+-var test = require('ava')
++var test = require('tape')
+ var implementation = require('../implementation')
+ var Promise = require('..')
+ var RSVPPromise = require('rsvp').Promise
+@@ -9,7 +9,8 @@
+ test(t => {
+   t.is(implementation, 'rsvp')
+   t.is(Promise, RSVPPromise)
+-  t.truthy(isPromise(new Promise(() => {})))
+-  t.truthy(Promise.all)
+-  t.truthy(global['@@any-promise/REGISTRATION'].implementation)
++  t.ok(isPromise(new Promise(() => {})))
++  t.ok(Promise.all)
++  t.ok(global['@@any-promise/REGISTRATION'].implementation)
++  t.end();
+ })
+--- a/test/rsvp.js
++++ b/test/rsvp.js
+@@ -1,5 +1,5 @@
+ require('../register')('rsvp')
+-var test = require('ava')
++var test = require('tape')
+ var implementation = require('../implementation')
+ var Promise = require('..')
+ var RSVPPromise = require('rsvp').Promise
+@@ -8,7 +8,8 @@
+ test(t => {
+   t.is(implementation, 'rsvp')
+   t.is(Promise, RSVPPromise)
+-  t.truthy(isPromise(new Promise(() => {})))
+-  t.truthy(Promise.all)
+-  t.truthy(global['@@any-promise/REGISTRATION'].implementation)
++  t.ok(isPromise(new Promise(() => {})))
++  t.ok(Promise.all)
++  t.ok(global['@@any-promise/REGISTRATION'].implementation)
++  t.end();
+ })
+--- a/test/vow-shortcut.js
++++ b/test/vow-shortcut.js
+@@ -1,5 +1,5 @@
+ require('../register/vow')
+-var test = require('ava')
++var test = require('tape')
+ var implementation = require('../implementation')
+ var Promise = require('..')
+ var VowPromise = require('vow').Promise
+@@ -8,7 +8,8 @@
+ test(t => {
+   t.is(implementation, 'vow')
+   t.is(Promise, VowPromise)
+-  t.truthy(isPromise(new Promise(() => {})))
+-  t.truthy(Promise.all)
+-  t.truthy(global['@@any-promise/REGISTRATION'].implementation)
++  t.ok(isPromise(new Promise(() => {})))
++  t.ok(Promise.all)
++  t.ok(global['@@any-promise/REGISTRATION'].implementation)
++  t.end();
+ })
+--- a/test/vow.js
++++ b/test/vow.js
+@@ -1,5 +1,5 @@
+ require('../register')('vow')
+-var test = require('ava')
++var test = require('tape')
+ var implementation = require('../implementation')
+ var Promise = require('..')
+ var VowPromise = require('vow').Promise
+@@ -8,7 +8,8 @@
+ test(t => {
+   t.is(implementation, 'vow')
+   t.is(Promise, VowPromise)
+-  t.truthy(isPromise(new Promise(() => {})))
+-  t.truthy(Promise.all)
+-  t.truthy(global['@@any-promise/REGISTRATION'].implementation)
++  t.ok(isPromise(new Promise(() => {})))
++  t.ok(Promise.all)
++  t.ok(global['@@any-promise/REGISTRATION'].implementation)
++  t.end();
+ })
+--- a/test/when-shortcut.js
++++ b/test/when-shortcut.js
+@@ -1,6 +1,6 @@
+-import '../register/when'
++require('../register/when')
+ 
+-var test = require('ava')
++var test = require('tape')
+ var implementation = require('../implementation')
+ var Promise = require('..')
+ var WhenPromise = require('when').Promise
+@@ -9,7 +9,8 @@
+ test(t => {
+   t.is(implementation, 'when')
+   t.is(Promise, WhenPromise)
+-  t.truthy(isPromise(new Promise(() => {})))
+-  t.truthy(Promise.all)
+-  t.truthy(global['@@any-promise/REGISTRATION'].implementation)
++  t.ok(isPromise(new Promise(() => {})))
++  t.ok(Promise.all)
++  t.ok(global['@@any-promise/REGISTRATION'].implementation)
++  t.end();
+ })
+--- a/test/when.js
++++ b/test/when.js
+@@ -1,5 +1,5 @@
+ require('../register')('when')
+-var test = require('ava')
++var test = require('tape')
+ var implementation = require('../implementation')
+ var Promise = require('..')
+ var WhenPromise = require('when').Promise
+@@ -8,7 +8,8 @@
+ test(t => {
+   t.is(implementation, 'when')
+   t.is(Promise, WhenPromise)
+-  t.truthy(isPromise(new Promise(() => {})))
+-  t.truthy(Promise.all)
+-  t.truthy(global['@@any-promise/REGISTRATION'].implementation)
++  t.ok(isPromise(new Promise(() => {})))
++  t.ok(Promise.all)
++  t.ok(global['@@any-promise/REGISTRATION'].implementation)
++  t.end();
+ })
